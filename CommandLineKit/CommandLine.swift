@@ -131,6 +131,13 @@ public class CommandLine {
   }
 
   /**
+     * The first line of usage instruction that printUsage prints.
+     * Allowing override your own
+     * - seealso: `printUsage`
+     */
+    public var usageMessage: String?
+
+  /**
    * The type of output being supplied to an output formatter.
    *
    * - seealso: `formatOutput`
@@ -407,7 +414,7 @@ public class CommandLine {
     /* Nil coalescing operator (??) doesn't work on closures :( */
     let format = formatOutput != nil ? formatOutput! : defaultFormat
 
-    let name = _arguments[0]
+    let name = usageMessage ?? _arguments[0]
     print(format("Usage: \(name) [options]", .about), terminator: "", to: &to)
 
     for opt in _options {
